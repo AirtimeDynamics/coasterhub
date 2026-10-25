@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#05070d">
+<meta name="description" content="One hub for a network of dedicated roller coaster and theme park fan websites. Choose your park and explore its rides, records, history and attractions.">
+<title>COASTERHUB — One World. Twenty Parks. Endless Airtime.</title>
+
+<!-- Same fonts as the individual park sites. Optional: the page falls back to system fonts if they cannot load. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ===================== DESIGN TOKENS (same palette as the park sites) ===================== */
+:root{
+  --bg:#05070d; --bg2:#090d17; --panel:#0d1320; --panel2:#111a29;
+  --line:rgba(255,255,255,.09);
+  --text:#f7f9fc; --muted:#94a3b8;
+  --blue:#19d3ff; --blue2:#008cff; --red:#ff3151; --green:#42e6a4;
+  --shadow:0 30px 90px rgba(0,0,0,.38);
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 15% 0%,rgba(0,174,255,.08),transparent 28rem),
+    radial-gradient(circle at 85% 20%,rgba(255,49,81,.06),transparent 30rem),
+    var(--bg);
+  overflow-x:hidden;
+}
+a{text-decoration:none;color:inherit}
+button{font:inherit;cursor:pointer;color:inherit}
+img{display:block;max-width:100%}
+::selection{background:var(--blue);color:#001018}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ===================== NAV ===================== */
+.nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:16px 28px}
+.nav-inner{
+  max-width:1420px;margin:auto;height:64px;padding:0 14px 0 20px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  border:1px solid rgba(255,255,255,.12);background:rgba(5,7,13,.6);
+  backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+  border-radius:22px;box-shadow:0 15px 50px rgba(0,0,0,.2);
+}
+.logo{font-family:Oswald,Impact,sans-serif;font-size:25px;font-weight:700;letter-spacing:1.5px;white-space:nowrap}
+.logo i{font-style:normal;color:var(--blue)}
+.logo span{color:var(--red)}
+.nav-links{display:flex;align-items:center;gap:6px}
+.nav-links a{color:#cbd5e1;font-size:13px;font-weight:700;padding:11px 13px;border-radius:12px;transition:.25s ease;white-space:nowrap}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.07)}
+
+/* ===================== HERO ===================== */
+.hero{
+  position:relative;overflow:hidden;background:#02050b;
+  min-height:min(82vh,760px);display:grid;align-items:end;
+}
+.hero-bg{position:absolute;inset:0;z-index:0;
+  background:
+    radial-gradient(circle at 70% 30%,rgba(0,140,255,.25),transparent 40rem),
+    radial-gradient(circle at 20% 80%,rgba(255,49,81,.18),transparent 36rem),
+    #060a14;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center;filter:saturate(1.05) contrast(1.04)}
+.hero::before{
+  content:"";position:absolute;inset:0;z-index:1;
+  background:
+    linear-gradient(180deg,rgba(2,5,11,.2) 0%,rgba(2,5,11,.3) 30%,rgba(2,5,11,.92) 100%),
+    linear-gradient(90deg,rgba(2,5,11,.8),transparent 60%,rgba(2,5,11,.35));
+}
+.hero::after{content:"";position:absolute;inset:auto 0 0;height:140px;background:linear-gradient(transparent,var(--bg));z-index:2}
+.hero-grid{
+  position:absolute;inset:0;z-index:1;opacity:.16;
+  background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);
+  background-size:70px 70px;-webkit-mask-image:linear-gradient(to bottom,#000,transparent 85%);mask-image:linear-gradient(to bottom,#000,transparent 85%);
+}
+.hero-content{
+  position:relative;z-index:3;max-width:1420px;width:100%;margin:auto;padding:140px 28px 80px;
+  display:grid;grid-template-columns:1.4fr .6fr;gap:50px;align-items:end;
+}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;color:#bfefff;font-size:12px;font-weight:900;letter-spacing:2px;text-transform:uppercase;margin-bottom:18px}
+.live-dot{width:8px;height:8px;background:var(--green);border-radius:50%;box-shadow:0 0 16px var(--green);animation:pulse 1.7s infinite}
+@keyframes pulse{50%{opacity:.35;transform:scale(.65)}}
+.hero h1{
+  font-family:Oswald,Impact,sans-serif;font-size:clamp(44px,6.6vw,98px);line-height:.92;
+  text-transform:uppercase;letter-spacing:-1.5px;max-width:960px;text-wrap:balance;font-weight:700
+}
+.hero h1 .blue{color:var(--blue);text-shadow:0 0 55px rgba(25,211,255,.28)}
+.hero h1 .red{color:var(--red);text-shadow:0 0 55px rgba(255,49,81,.22)}
+.hero-copy{max-width:640px;color:#d7dfeb;font-size:17px;line-height:1.7;margin-top:24px;text-shadow:0 2px 18px rgba(0,0,0,.75)}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 22px;
+  border-radius:14px;border:1px solid var(--line);font-size:12px;font-weight:900;letter-spacing:.7px;
+  text-transform:uppercase;transition:.3s var(--ease)
+}
+.btn svg{width:15px;height:15px}
+.btn-primary{background:#fff;color:#05070d;border-color:#fff}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 15px 35px rgba(255,255,255,.16)}
+.btn-dark{background:rgba(5,7,13,.48);color:#fff;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.btn-dark:hover{transform:translateY(-3px);border-color:var(--blue);color:var(--blue)}
+.btn-dark.red:hover{border-color:var(--red);color:var(--red)}
+
+.hero-panel{padding:22px;border:1px solid rgba(255,255,255,.14);background:rgba(4,8,15,.58);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:22px;box-shadow:var(--shadow)}
+.panel-label{font-size:12px;text-transform:uppercase;letter-spacing:1.8px;color:var(--muted);font-weight:900;margin-bottom:16px}
+.panel-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mini-stat{padding:14px;border-radius:13px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07)}
+.mini-stat b{display:block;font-family:Oswald,Impact,sans-serif;font-size:34px;line-height:1.1}
+.mini-stat.ok b{color:var(--green)}
+.mini-stat span{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:700}
+.panel-note{color:var(--muted);font-size:13px;line-height:1.6;margin-top:14px}
+
+/* ===================== REGION SECTIONS ===================== */
+.region{--accent:var(--blue);--accent-rgb:25,211,255}
+.region.america{--accent:var(--red);--accent-rgb:255,49,81;background:linear-gradient(180deg,#070b13,#0a0f1a 50%,#070b13);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.region-inner{max-width:1420px;margin:auto;padding:76px 28px}
+.region-head{display:flex;justify-content:space-between;align-items:end;gap:26px;margin-bottom:32px;flex-wrap:wrap}
+.kicker{color:var(--accent);font-size:12px;font-weight:900;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:12px}
+.kicker::before{content:"";width:34px;height:3px;border-radius:3px;background:var(--accent);box-shadow:0 0 14px rgba(var(--accent-rgb),.6)}
+.region h2{font-family:Oswald,Impact,sans-serif;font-size:clamp(36px,5vw,68px);line-height:.98;text-transform:uppercase;letter-spacing:-1px;font-weight:700}
+.region-intro{max-width:420px;color:var(--muted);font-size:14px;line-height:1.7}
+
+/* ===================== PARK CARDS ===================== */
+.park-grid{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:16px}
+.park-card{
+  position:relative;display:flex;flex-direction:column;height:100%;width:100%;text-align:left;
+  border:1px solid var(--line);border-radius:22px;overflow:hidden;
+  background:linear-gradient(145deg,#101827,#0a0f18);transition:transform .45s var(--ease),box-shadow .45s var(--ease),border-color .3s;
+}
+.park-media{position:relative;aspect-ratio:4/3;overflow:hidden;background:
+  radial-gradient(circle at 30% 20%,rgba(var(--accent-rgb),.22),transparent 60%),#0a0f18}
+.park-media img{width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .7s var(--ease),filter .4s}
+.park-media.img-missing img{visibility:hidden}
+.park-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,5,10,.15) 40%,rgba(2,5,10,.75) 100%);pointer-events:none}
+.badge{
+  position:absolute;top:12px;left:12px;z-index:2;display:inline-flex;align-items:center;gap:7px;
+  padding:7px 11px;border-radius:99px;font-size:11px;font-weight:900;letter-spacing:1.1px;text-transform:uppercase;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.badge svg{width:12px;height:12px}
+.badge-on{background:rgba(5,30,20,.78);border:1px solid rgba(66,230,164,.55);color:#7dfac0}
+.badge-on::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green)}
+.badge-off{background:rgba(8,11,18,.85);border:1px solid rgba(255,255,255,.28);color:#e2e8f0}
+.park-body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:4px;flex:1}
+.park-body h3{font-family:Oswald,Impact,sans-serif;font-size:25px;line-height:1.08;text-transform:uppercase;font-weight:600;overflow-wrap:anywhere}
+.park-place{color:var(--muted);font-size:13px;line-height:1.45}
+.park-cta{margin-top:auto;padding-top:12px;display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:12px;font-weight:900;letter-spacing:.9px;text-transform:uppercase}
+.park-cta svg{width:34px;height:34px;padding:9px;border-radius:11px;background:rgba(255,255,255,.1);transition:.3s var(--ease);flex:none}
+
+/* available */
+.is-available{cursor:pointer}
+.is-available .park-cta{color:var(--accent)}
+.is-available:hover{transform:translateY(-6px);box-shadow:0 25px 55px rgba(0,0,0,.4),0 0 40px rgba(var(--accent-rgb),.1);border-color:rgba(var(--accent-rgb),.6)}
+.is-available:hover .park-media img{transform:scale(1.07)}
+.is-available:hover .park-cta svg{background:var(--accent);color:#001018;transform:translateX(3px)}
+
+/* locked: same structure, muted treatment (all done in CSS, no separate images) */
+.is-locked{cursor:not-allowed;background:linear-gradient(145deg,#0d121c,#090c13);border-color:rgba(255,255,255,.06)}
+.is-locked .park-media img{filter:grayscale(1) saturate(0) brightness(.6) contrast(.95)}
+.is-locked .park-media::after{background:linear-gradient(180deg,rgba(5,7,13,.45) 0%,rgba(5,7,13,.8) 100%)}
+.is-locked .park-body h3{color:#cfd7e3}
+.is-locked .park-place{color:#8793a6}
+.is-locked .park-cta{color:#9aa6b8}
+.is-locked .park-cta svg{background:rgba(255,255,255,.05)}
+.lock-mark{position:absolute;right:12px;top:12px;z-index:2;width:36px;height:36px;border-radius:12px;display:grid;place-items:center;background:rgba(5,7,13,.7);border:1px solid rgba(255,255,255,.18);color:#cbd5e1}
+.lock-mark svg{width:16px;height:16px}
+
+/* ===================== MORE COMING ===================== */
+.more{max-width:1420px;margin:auto;padding:90px 28px}
+.more-box{
+  position:relative;overflow:hidden;text-align:center;padding:64px 28px;border-radius:28px;
+  border:1px solid rgba(255,255,255,.12);
+  background:
+    radial-gradient(circle at 20% 0%,rgba(25,211,255,.14),transparent 22rem),
+    radial-gradient(circle at 85% 100%,rgba(255,49,81,.14),transparent 22rem),
+    linear-gradient(145deg,#101827,#0a0f18);
+  box-shadow:var(--shadow);
+}
+.more-box h2{font-family:Oswald,Impact,sans-serif;font-size:clamp(34px,5.2vw,70px);line-height:1;text-transform:uppercase;letter-spacing:-1px;max-width:900px;margin:0 auto;text-wrap:balance;font-weight:700}
+.more-box p{max-width:620px;margin:20px auto 0;color:#b6c1d1;font-size:16px;line-height:1.7}
+.more-line{width:90px;height:3px;border-radius:3px;margin:26px auto 0;background:linear-gradient(90deg,var(--blue),var(--red));box-shadow:0 0 18px rgba(25,211,255,.5)}
+
+/* ===================== FOOTER ===================== */
+.footer{padding:50px 28px 26px;border-top:1px solid var(--line);background:#03050a}
+.footer-inner{max-width:1420px;margin:auto;display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-start}
+.footer-brand p{color:#748195;font-size:13px;line-height:1.7;margin-top:10px;max-width:460px}
+.footer-links{display:flex;gap:40px}
+.footer-links a{display:block;color:#8a97ab;font-size:13px;margin:8px 0}
+.footer-links a:hover{color:var(--blue)}
+.footer-bottom{max-width:1420px;margin:36px auto 0;padding-top:18px;border-top:1px solid var(--line);color:#667388;font-size:12px;letter-spacing:.6px}
+
+/* ===================== TOAST ===================== */
+.toast{
+  position:fixed;left:50%;bottom:24px;z-index:900;width:min(520px,calc(100% - 32px));
+  padding:16px 18px;border-radius:16px;font-size:14px;line-height:1.55;
+  background:rgba(13,19,32,.96);border:1px solid rgba(255,49,81,.5);box-shadow:0 20px 60px rgba(0,0,0,.55);
+  transform:translate(-50%,30px);opacity:0;visibility:hidden;transition:.35s var(--ease);
+}
+.toast.show{transform:translate(-50%,0);opacity:1;visibility:visible}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width:980px){
+  .hero-content{grid-template-columns:1fr;gap:30px;padding-bottom:60px}
+  .hero-panel{max-width:460px}
+}
+@media (max-width:640px){
+  .nav{padding:10px 12px}
+  .nav-inner{height:56px;padding:0 8px 0 14px;border-radius:18px}
+  .logo{font-size:21px}
+  .nav-links a{padding:10px 9px;font-size:12px}
+  .nav-links .hide-sm{display:none}
+  .hero-content{padding:110px 18px 50px}
+  .hero-copy{font-size:15px}
+  .region-inner{padding:56px 18px}
+  .more{padding:56px 18px}
+  .more-box{padding:44px 20px;border-radius:22px}
+  .footer{padding:40px 18px 22px}
+  .btn{flex:1 1 100%}
+}
+@media (max-width:360px){
+  .logo{font-size:18px}
+  .nav-links a{padding:10px 6px}
+  .park-body h3{font-size:22px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="#top" aria-label="CoasterHub home">COASTER<i>HUB</i><span>•</span></a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#europe">Europe</a>
+      <a href="#america">America</a>
+      <a href="#more" class="hide-sm">Coming Next</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-bg"><img id="heroImg" src="park_hub_hero.jpg" alt="A roller coaster racing through a theme park at dusk" fetchpriority="high"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <div>
+        <div class="eyebrow"><span class="live-dot"></span>A network of dedicated park websites</div>
+        <h1 id="hero-title">One world.<br><span class="blue">Twenty parks.</span><br><span class="red">Endless airtime.</span></h1>
+        <p class="hero-copy">Explore dedicated roller coaster and theme park websites built for enthusiasts. Choose your park and discover its rides, records, history, and attractions.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#europe">Choose your park
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
+          <a class="btn btn-dark" href="#europe">Explore Europe</a>
+          <a class="btn btn-dark red" href="#america">Explore America</a>
+        </div>
+      </div>
+      <aside class="hero-panel" aria-label="Network status">
+        <div class="panel-label">Network status</div>
+        <div class="panel-stats">
+          <div class="mini-stat ok"><b id="statOn">3</b><span>Parks open</span></div>
+          <div class="mini-stat"><b id="statOff">17</b><span>Coming soon</span></div>
+        </div>
+        <p class="panel-note">Parks marked <strong>Available</strong> have a live website. Locked parks are still in development.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ===================== REGIONS (cards are rendered by JavaScript from PARKS) ===================== -->
+  <section class="region europe" id="europe" aria-labelledby="europe-title">
+    <div class="region-inner">
+      <div class="region-head">
+        <div>
+          <div class="kicker" id="europeCount">Europe</div>
+          <h2 id="europe-title">European Theme Parks</h2>
+        </div>
+        <p class="region-intro">From Polish record-breakers to German themed masterpieces. Open a park to enter its dedicated site.</p>
+      </div>
+      <ul class="park-grid" id="grid-europe"></ul>
+    </div>
+  </section>
+
+  <section class="region america" id="america" aria-labelledby="america-title">
+    <div class="region-inner">
+      <div class="region-head">
+        <div>
+          <div class="kicker" id="americaCount">America</div>
+          <h2 id="america-title">American Theme Parks</h2>
+        </div>
+        <p class="region-intro">Home of the steel giants and the legendary parks that shaped the modern roller coaster.</p>
+      </div>
+      <ul class="park-grid" id="grid-america"></ul>
+    </div>
+  </section>
+
+  <!-- ===================== COMING NEXT ===================== -->
+  <section class="more" id="more" aria-labelledby="more-title">
+    <div class="more-box">
+      <h2 id="more-title">The journey doesn't end here.</h2>
+      <p>More parks, more roller coasters, and more dedicated fan websites are on the way. We're gradually expanding the network, so check back soon to discover the next destination.</p>
+      <div class="more-line"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a class="logo" href="#top">COASTER<i>HUB</i><span>•</span></a>
+      <p>The central hub for a network of fan-made roller coaster and theme park websites. Unofficial and not affiliated with any theme park.</p>
+    </div>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <div><a href="#europe">European parks</a><a href="#america">American parks</a></div>
+      <div><a href="#more">Coming next</a><a href="#top">Back to top</a></div>
+    </nav>
+  </div>
+  <div class="footer-bottom">© <span id="year">2026</span> CoasterHub. All park names belong to their respective owners.</div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* =====================================================================
+   1. PARK CONFIGURATION  —  THE ONLY PLACE YOU NEED TO EDIT
+   ---------------------------------------------------------------------
+   To launch a park website, change TWO things on that park's line:
+       url:    ''            ->  url:    'https://your-site.example/park/'
+       status: 'comingSoon'  ->  status: 'available'
+   (relative links such as 'energylandia/' also work)
+
+   id      unique identifier           region  'europe' or 'america'
+   place   country / US state          image   local file next to index.html
+   status  'available' | 'comingSoon'  url     destination of the park's own website
+   ===================================================================== */
+const PARKS = [
+  /* ---------- EUROPEAN THEME PARKS ---------- */
+  { id:'energylandia',            name:'Energylandia',              region:'europe',  place:'Poland',          image:'energylandia.jpg',            status:'available',  url:'https://airtimedynamics.github.io/energylandia-fans/' },
+  { id:'phantasialand',           name:'Phantasialand',             region:'europe',  place:'Germany',         image:'phantasialand.jpg',           status:'comingSoon', url:'' },
+  { id:'europa-park',             name:'Europa-Park',               region:'europe',  place:'Germany',         image:'europa_park.jpg',             status:'comingSoon', url:'' },
+  { id:'efteling',                name:'Efteling',                  region:'europe',  place:'Netherlands',     image:'efteling.jpg',                status:'comingSoon', url:'' },
+  { id:'portaventura',            name:'PortAventura',              region:'europe',  place:'Spain',           image:'portaventura.jpg',            status:'comingSoon', url:'' },
+  { id:'alton-towers',            name:'Alton Towers',              region:'europe',  place:'United Kingdom',  image:'alton_towers.jpg',            status:'comingSoon', url:'' },
+  { id:'walibi-holland',          name:'Walibi Holland',            region:'europe',  place:'Netherlands',     image:'walibi_holland.jpg',          status:'comingSoon', url:'' },
+  { id:'parc-asterix',            name:'Parc Astérix',              region:'europe',  place:'France',          image:'parc_asterix.jpg',            status:'comingSoon', url:'' },
+  { id:'liseberg',                name:'Liseberg',                  region:'europe',  place:'Sweden',          image:'liseberg.jpg',                status:'comingSoon', url:'' },
+  { id:'gardaland',               name:'Gardaland',                 region:'europe',  place:'Italy',           image:'gardaland.jpg',               status:'comingSoon', url:'' },
+
+  /* ---------- AMERICAN THEME PARKS ---------- */
+  { id:'cedar-point',             name:'Cedar Point',               region:'america', place:'Ohio, United States',          image:'cedar_point.jpg',              status:'available',  url:'https://airtimedynamics.github.io/cedar_point-fans/' },
+  { id:'six-flags-magic-mountain',name:'Six Flags Magic Mountain',  region:'america', place:'California, United States',    image:'six_flags_magic_mountain.jpg', status:'comingSoon', url:'' },
+  { id:'kings-island',            name:'Kings Island',              region:'america', place:'Ohio, United States',          image:'kings_island.jpg',             status:'comingSoon', url:'' },
+  { id:'hersheypark',             name:'Hersheypark',               region:'america', place:'Pennsylvania, United States',  image:'hersheypark.jpg',              status:'comingSoon', url:'' },
+  { id:'busch-gardens-tampa-bay', name:'Busch Gardens Tampa Bay',   region:'america', place:'Florida, United States',       image:'busch_gardens_tampa_bay.jpg',  status:'comingSoon', url:'' },
+  { id:'islands-of-adventure',    name:'Islands of Adventure',      region:'america', place:'Florida, United States',       image:'islands_of_adventure.jpg',     status:'comingSoon', url:'' },
+  { id:'six-flags-over-texas',    name:'Six Flags Over Texas',      region:'america', place:'Texas, United States',         image:'six_flags_over_texas.jpg',     status:'available',  url:'https://airtimedynamics.github.io/sf_overtexas-fans/' },
+  { id:'carowinds',               name:'Carowinds',                 region:'america', place:'North Carolina and South Carolina, United States', image:'carowinds.jpg', status:'comingSoon', url:'' },
+  { id:'knotts-berry-farm',       name:"Knott's Berry Farm",        region:'america', place:'California, United States',    image:'knotts_berry_farm.jpg',        status:'comingSoon', url:'' },
+  { id:'six-flags-great-adventure',name:'Six Flags Great Adventure',region:'america', place:'New Jersey, United States',    image:'six_flags_great_adventure.jpg',status:'comingSoon', url:'' }
+];
+
+/* =====================================================================
+   2. RENDERING LOGIC  (no need to edit below this line)
+   ===================================================================== */
+const ICON_LOCK  = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
+const ICON_ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>';
+
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const hasUrl  = p => typeof p.url === 'string' && p.url.trim() !== '';
+const isOpen  = p => p.status === 'available';
+
+function cardInner(p) {
+  const open = isOpen(p);
+  const badge = open
+    ? '<span class="badge badge-on">Available</span>'
+    : '<span class="badge badge-off">Coming soon</span>';
+  const lock = open ? '' : '<span class="lock-mark" aria-hidden="true">' + ICON_LOCK + '</span>';
+  const cta = open
+    ? '<span>Explore park</span>' + ICON_ARROW
+    : '<span>Website in development</span>';
+  return '<div class="park-media">' + badge + lock + '</div>' +
+         '<div class="park-body"><h3>' + esc(p.name) + '</h3>' +
+         '<div class="park-place">' + esc(p.place) + '</div>' +
+         '<div class="park-cta">' + cta + '</div></div>';
+}
+
+function attachImage(card, p) {
+  const media = card.querySelector('.park-media');
+  const img = new Image();
+  img.alt = 'Photograph of ' + p.name + ', ' + p.place;
+  img.loading = 'lazy';
+  img.decoding = 'async';
+  img.addEventListener('error', () => media.classList.add('img-missing'));  // layout stays intact
+  img.src = p.image;
+  media.insertBefore(img, media.firstChild);
+}
+
+function buildCard(p) {
+  const li = document.createElement('li');
+  let card;
+
+  if (isOpen(p) && hasUrl(p)) {
+    card = document.createElement('a');                       // real link
+    card.href = p.url.trim();
+    card.setAttribute('aria-label', p.name + ', ' + p.place + '. Available. Open the ' + p.name + ' website.');
+  } else if (isOpen(p)) {
+    card = document.createElement('button');                  // available, but URL not entered yet
+    card.type = 'button';
+    card.setAttribute('aria-label', p.name + ', ' + p.place + '. Available, but the link is not configured yet.');
+    card.addEventListener('click', () => showMessage(
+      'The link for ' + p.name + ' has not been configured yet. Add its URL to the PARKS list in index.html.'));
+  } else {
+    card = document.createElement('div');                     // locked: never navigates
+    card.tabIndex = 0;
+    card.setAttribute('role', 'group');
+    card.setAttribute('aria-label', p.name + ', ' + p.place + '. Coming soon. This park website is not available yet.');
+    card.addEventListener('click', () => showMessage(p.name + ' is coming soon. Its website is still in development.'));
+  }
+
+  card.className = 'park-card ' + (isOpen(p) ? 'is-available' : 'is-locked');
+  card.dataset.parkId = p.id;
+  card.innerHTML = cardInner(p);
+  attachImage(card, p);
+  li.appendChild(card);
+  return li;
+}
+
+let toastTimer;
+function showMessage(text) {
+  const t = document.getElementById('toast');
+  t.textContent = text;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 5000);
+}
+
+function render() {
+  ['europe', 'america'].forEach(region => {
+    const grid = document.getElementById('grid-' + region);
+    const list = PARKS.filter(p => p.region === region);
+    grid.innerHTML = '';
+    list.forEach(p => grid.appendChild(buildCard(p)));
+    const on = list.filter(isOpen).length;
+    document.getElementById(region + 'Count').textContent =
+      list.length + ' parks · ' + on + ' available';
+  });
+  const on = PARKS.filter(isOpen).length;
+  document.getElementById('statOn').textContent  = on;
+  document.getElementById('statOff').textContent = PARKS.length - on;
+  document.getElementById('year').textContent = new Date().getFullYear();
+}
+
+// Hero image failure: keep the gradient background
+document.getElementById('heroImg').addEventListener('error', e => { e.target.style.display = 'none'; });
+
+render();
+</script>
+</body>
+</html>
