@@ -269,7 +269,7 @@ img{display:block;max-width:100%}
           <div class="mini-stat ok"><b id="statOn">3</b><span>Parks open</span></div>
           <div class="mini-stat"><b id="statOff">17</b><span>Coming soon</span></div>
         </div>
-        <p class="panel-note">Parks marked <strong>Available</strong> have a live website. Locked parks are still in development.</p>
+        <p class="panel-note">Open parks have a live website. Parks marked <strong>Coming soon</strong> are still in development.</p>
       </aside>
     </div>
   </section>
@@ -342,7 +342,7 @@ img{display:block;max-width:100%}
    ===================================================================== */
 const PARKS = [
   /* ---------- EUROPEAN THEME PARKS ---------- */
-  { id:'energylandia',            name:'Energylandia',              region:'europe',  place:'Poland',          image:'energylandia.jpg',            status:'available',  url:'https://airtimedynamics.github.io/energylandia-fans/' },
+  { id:'energylandia',            name:'Energylandia',              region:'europe',  place:'Poland',          image:'energylandia.jpg',            status:'available',  url:'' },
   { id:'phantasialand',           name:'Phantasialand',             region:'europe',  place:'Germany',         image:'phantasialand.jpg',           status:'comingSoon', url:'' },
   { id:'europa-park',             name:'Europa-Park',               region:'europe',  place:'Germany',         image:'europa_park.jpg',             status:'comingSoon', url:'' },
   { id:'efteling',                name:'Efteling',                  region:'europe',  place:'Netherlands',     image:'efteling.jpg',                status:'comingSoon', url:'' },
@@ -354,13 +354,13 @@ const PARKS = [
   { id:'gardaland',               name:'Gardaland',                 region:'europe',  place:'Italy',           image:'gardaland.jpg',               status:'comingSoon', url:'' },
 
   /* ---------- AMERICAN THEME PARKS ---------- */
-  { id:'cedar-point',             name:'Cedar Point',               region:'america', place:'Ohio, United States',          image:'cedar_point.jpg',              status:'available',  url:'https://airtimedynamics.github.io/cedar_point-fans/' },
+  { id:'cedar-point',             name:'Cedar Point',               region:'america', place:'Ohio, United States',          image:'cedar_point.jpg',              status:'available',  url:'' },
   { id:'six-flags-magic-mountain',name:'Six Flags Magic Mountain',  region:'america', place:'California, United States',    image:'six_flags_magic_mountain.jpg', status:'comingSoon', url:'' },
   { id:'kings-island',            name:'Kings Island',              region:'america', place:'Ohio, United States',          image:'kings_island.jpg',             status:'comingSoon', url:'' },
   { id:'hersheypark',             name:'Hersheypark',               region:'america', place:'Pennsylvania, United States',  image:'hersheypark.jpg',              status:'comingSoon', url:'' },
   { id:'busch-gardens-tampa-bay', name:'Busch Gardens Tampa Bay',   region:'america', place:'Florida, United States',       image:'busch_gardens_tampa_bay.jpg',  status:'comingSoon', url:'' },
   { id:'islands-of-adventure',    name:'Islands of Adventure',      region:'america', place:'Florida, United States',       image:'islands_of_adventure.jpg',     status:'comingSoon', url:'' },
-  { id:'six-flags-over-texas',    name:'Six Flags Over Texas',      region:'america', place:'Texas, United States',         image:'six_flags_over_texas.jpg',     status:'available',  url:'https://airtimedynamics.github.io/sf_overtexas-fans/' },
+  { id:'six-flags-over-texas',    name:'Six Flags Over Texas',      region:'america', place:'Texas, United States',         image:'six_flags_over_texas.jpg',     status:'available',  url:'' },
   { id:'carowinds',               name:'Carowinds',                 region:'america', place:'North Carolina and South Carolina, United States', image:'carowinds.jpg', status:'comingSoon', url:'' },
   { id:'knotts-berry-farm',       name:"Knott's Berry Farm",        region:'america', place:'California, United States',    image:'knotts_berry_farm.jpg',        status:'comingSoon', url:'' },
   { id:'six-flags-great-adventure',name:'Six Flags Great Adventure',region:'america', place:'New Jersey, United States',    image:'six_flags_great_adventure.jpg',status:'comingSoon', url:'' }
@@ -378,9 +378,7 @@ const isOpen  = p => p.status === 'available';
 
 function cardInner(p) {
   const open = isOpen(p);
-  const badge = open
-    ? '<span class="badge badge-on">Available</span>'
-    : '<span class="badge badge-off">Coming soon</span>';
+  const badge = open ? '' : '<span class="badge badge-off">Coming soon</span>';
   const lock = open ? '' : '<span class="lock-mark" aria-hidden="true">' + ICON_LOCK + '</span>';
   const cta = open
     ? '<span>Explore park</span>' + ICON_ARROW
@@ -447,9 +445,7 @@ function render() {
     const list = PARKS.filter(p => p.region === region);
     grid.innerHTML = '';
     list.forEach(p => grid.appendChild(buildCard(p)));
-    const on = list.filter(isOpen).length;
-    document.getElementById(region + 'Count').textContent =
-      list.length + ' parks · ' + on + ' available';
+    document.getElementById(region + 'Count').textContent = list.length + ' parks';
   });
   const on = PARKS.filter(isOpen).length;
   document.getElementById('statOn').textContent  = on;
